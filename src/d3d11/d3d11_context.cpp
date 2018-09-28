@@ -1114,6 +1114,12 @@ namespace dxvk {
           ID3D11Resource*                   pSrcResource,
           UINT                              SrcSubresource,
           DXGI_FORMAT                       Format) {
+    bool isSameSubresource = pDstResource   == pSrcResource
+                          && DstSubresource == SrcSubresource;
+    
+    if (!pDstResource || !pSrcResource || isSameSubresource)
+      return;
+    
     D3D11_RESOURCE_DIMENSION dstResourceType;
     D3D11_RESOURCE_DIMENSION srcResourceType;
     
